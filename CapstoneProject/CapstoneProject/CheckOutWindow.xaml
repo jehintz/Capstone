@@ -1,0 +1,18 @@
+﻿<Window x:Name="checkOutWindow" x:Class="CapstoneProject.CheckOutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Check Out a Book" Height="433" Width="549">
+    <Grid>
+        <Label x:Name="isbnInstructionLabel" Content="Enter the ISBN of books the patron wishes to check out, one at a time:" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top" Padding="0,5,5,5" Visibility="Hidden"/>
+        <TextBox x:Name="isbnEntryBox" Height="23" Margin="12,98,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="432" HorizontalAlignment="Left" SpellCheck.IsEnabled="True" Visibility="Hidden"/>
+        <ListBox x:Name="checkOutList" Margin="10,146,10,38"/>
+        <Button x:Name="checkOutButton" Content="Check Out" Margin="0,0,90,10" HorizontalAlignment="Right" Width="75" Height="19" VerticalAlignment="Bottom" IsEnabled="False" Click="checkOutButton_Click"/>
+        <Button x:Name="cancelButton" Content="Cancel" Margin="0,0,10,10" RenderTransformOrigin="0.427,0.5" Click="cancelButton_Click" Height="19" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" IsEnabled="False"/>
+        <Label x:Name="idInstructionLabel" Content="Enter the patron's library card ID:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="cardIDEntryBox" HorizontalAlignment="Left" Height="23" Margin="12,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="432"/>
+        <Button x:Name="searchButton" Content="Search" Margin="0,35,10,0" VerticalAlignment="Top" Height="23" HorizontalAlignment="Right" Width="75" Click="searchButton_Click"/>
+        <Button x:Name="addButton" Content="Add" Margin="0,98,10,0" VerticalAlignment="Top" Height="23" Click="addButton_Click" HorizontalAlignment="Right" Width="75" Visibility="Hidden"/>
+        <Label x:Name="errorLabel" Content="Label" HorizontalAlignment="Left" Margin="10,121,0,0" VerticalAlignment="Top" Padding="0,5,5,5" Foreground="Red" Visibility="Hidden"/>
+
+    </Grid>
+</Window>

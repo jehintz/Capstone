@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8b7ad2c69e6e4e119ff8b9ce810ed4a4" Name="Diagram1">
+        <EntityTypeShape EntityType="LibraryInformation2Model.Authors" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryInformation2Model.Books" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryInformation2Model.Cardholders" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryInformation2Model.CheckOutLog" Width="1.5" PointX="7.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryInformation2Model.Librarians" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryInformation2Model.People" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryInformation2Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="LibraryInformation2Model.FK_Authors_People" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryInformation2Model.FK_Books_Authors" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryInformation2Model.FK_CheckOutLog_Books" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryInformation2Model.FK_Cardholders_People" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryInformation2Model.FK_CheckOutLog_Cardholders" ManuallyRouted="false" />
+        <AssociationConnector Association="LibraryInformation2Model.FK_Librarians_People" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="LibraryInformation2Model.Authors" />
+        <InheritanceConnector EntityType="LibraryInformation2Model.Cardholders" />
+        <InheritanceConnector EntityType="LibraryInformation2Model.Librarians" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

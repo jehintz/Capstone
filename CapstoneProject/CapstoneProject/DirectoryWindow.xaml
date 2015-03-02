@@ -1,0 +1,18 @@
+﻿<Window x:Class="CapstoneProject.DirectoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Directory" Height="428" Width="612">
+    <Grid>
+        <RadioButton x:Name="librariansRadioButton" Content="Librarians" Margin="0,17,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="89" Checked="librariansRadioButton_Checked"/>
+        <RadioButton x:Name="cardholdersRadioButton" Content="Cardholders" Margin="0,36,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="89" Checked="cardholdersRadioButton_Checked"/>
+        <RadioButton x:Name="authorsRadioButton" Content="Authors" Margin="0,55,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="89" Checked="authorsRadioButton_Checked"/>
+        <RichTextBox x:Name="directoryRichTextBox" HorizontalAlignment="Left" Height="370" Margin="10,17,0,0" VerticalAlignment="Top" Width="480" AllowDrop="False" TextOptions.TextFormattingMode="Display" VerticalScrollBarVisibility="Auto" BorderBrush="#FFABADB3" IsUndoEnabled="False" IsReadOnly="True">
+            <FlowDocument LineHeight="1">
+                <Paragraph>
+                    <Run/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+    </Grid>
+</Window>

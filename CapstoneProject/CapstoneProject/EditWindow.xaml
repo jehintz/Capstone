@@ -1,0 +1,41 @@
+﻿<Window x:Name="editWindow" x:Class="CapstoneProject.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add, Remove, or Edit Books" Height="421.625" Width="789" ResizeMode="NoResize">
+    <Grid Margin="0,0,-6,0">
+        <Label x:Name="isbnLabel" Content="Enter the ISBN of the book you wish to add/edit:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Padding="0,5,5,5"/>
+        <TextBox x:Name="isbnEntryTextBox" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237"/>
+        <Button x:Name="confirmButton" Content="Confirm" HorizontalAlignment="Left" Margin="687,356,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="confirmButton_Click"/>
+        <Button x:Name="cancelButton" Content="Cancel" HorizontalAlignment="Left" Margin="607,356,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="cancelButton_Click"/>
+        <Label x:Name="titleLabel" Content="Title" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="firstNameLabel" Content="Author (First Name)" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="lastNameLabel" Content="Author (Last Name)" HorizontalAlignment="Left" Margin="262,116,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Button x:Name="searchButton" Content="Search" HorizontalAlignment="Left" Margin="262,37,0,0" VerticalAlignment="Top" Width="75" Click="searchButton_Click"/>
+        <Label x:Name="publisherLabel" Content="Publisher" HorizontalAlignment="Left" Margin="10,169,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="yearLabel" Content="Year Published" HorizontalAlignment="Left" Margin="262,169,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="subjectLabel" Content="Subject" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="descriptionLabel" Content="Description" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="copiesLabel" Content="No. of Copies" HorizontalAlignment="Left" Margin="542,169,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="errorLabel" Content="Label" HorizontalAlignment="Left" Margin="10,326,0,0" VerticalAlignment="Top" Width="752" Padding="0,5,1,5" Foreground="Red" Visibility="Hidden"/>
+        <Label x:Name="newSubjectLabel" Content="Subject" HorizontalAlignment="Left" Margin="262,222,0,0" VerticalAlignment="Top" Padding="0,5,5,5" Visibility="Hidden"/>
+        <Label x:Name="isbnErrorLabel" Content="Label" HorizontalAlignment="Left" Margin="342,38,0,0" VerticalAlignment="Top" Foreground="Red" Padding="0,5,5,5" Visibility="Hidden"/>
+        <Label x:Name="pagesLabel" Content="Pages" HorizontalAlignment="Left" Margin="401,169,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="bioLabel" Content="Author Bio" HorizontalAlignment="Left" Margin="542,116,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <Label x:Name="languageLabel" Content="Language" HorizontalAlignment="Left" Margin="542,63,0,0" VerticalAlignment="Top" Padding="0,5,5,5" IsEnabled="False"/>
+        <ComboBox x:Name="firstNameComboBox" HorizontalAlignment="Left" Margin="10,141,0,0" VerticalAlignment="Top" Width="237" Visibility="Collapsed" SelectionChanged="firstNameComboBox_SelectionChanged"/>
+        <ComboBox x:Name="lastNameComboBox" HorizontalAlignment="Left" Margin="262,141,0,0" VerticalAlignment="Top" Width="260" Visibility="Collapsed" SelectionChanged="lastNameComboBox_SelectionChanged"/>
+        <TextBox x:Name="titleEntryTextBox" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="512" IsEnabled="False"/>
+        <TextBox x:Name="languageEntryBox" HorizontalAlignment="Left" Height="23" Margin="542,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsEnabled="False"/>
+        <TextBox x:Name="firstNameEntryBox" HorizontalAlignment="Left" Height="23" Margin="10,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" IsEnabled="False" TextChanged="firstNameEntryBox_TextChanged" LostFocus="firstNameEntryBox_LostFocus"/>
+        <TextBox x:Name="lastNameEntryBox" HorizontalAlignment="Left" Height="23" Margin="262,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" IsEnabled="False" TextChanged="lastNameEntryBox_TextChanged" LostFocus="lastNameEntryBox_LostFocus"/>
+        <TextBox x:Name="bioEntryBox" HorizontalAlignment="Left" Height="23" Margin="542,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsEnabled="False"/>
+        <TextBox x:Name="publisherEntryBox" HorizontalAlignment="Left" Height="23" Margin="10,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237" IsEnabled="False"/>
+        <TextBox x:Name="yearEntryBox" HorizontalAlignment="Left" Height="23" Margin="262,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" IsEnabled="False"/>
+        <TextBox x:Name="pagesEntryBox" HorizontalAlignment="Left" Height="23" Margin="401,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" IsEnabled="False"/>
+        <TextBox x:Name="copiesEntryBox" HorizontalAlignment="Left" Height="23" Margin="542,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121" IsEnabled="False"/>
+        <ComboBox x:Name="subjectComboBox" HorizontalAlignment="Left" Margin="10,247,0,0" VerticalAlignment="Top" Width="237" IsEnabled="False" SelectionChanged="subjectComboBox_SelectionChanged"/>
+        <TextBox x:Name="subjectEntryBox" HorizontalAlignment="Left" Height="23" Margin="262,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" Visibility="Hidden"/>
+        <TextBox x:Name="descriptionEntryBox" HorizontalAlignment="Left" Height="23" Margin="10,298,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="752" IsEnabled="False"/>
+    </Grid>
+
+</Window>
