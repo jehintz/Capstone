@@ -10,17 +10,11 @@ namespace CapstoneProject
     //Also contains data useful for the code used when checking each book in (LogID/BookID).
     class CheckInDisplay : IComparable<CheckInDisplay>
     {
-        //Private variables
-        private int _logID;
-        private int _bookID;
-        private string _title;
-        private string _status;
-
         //Public properties
-        public int LogID { get { return _logID; } set { _logID = value; } }
-        public int BookID { get { return _bookID; } set { _bookID = value; } }
-        public string Title { get { return _title; } set { _title = value; } }
-        public string Status { get { return _status; } set { _status = value; } }
+        public int LogID { get; set; }
+        public int BookID { get; set; }
+        public string Title { get; set; }
+        public string Status { get; set; }
 
         //Constructor
         public CheckInDisplay(int logID, int bookID, string bookTitle, string overdueStatus)

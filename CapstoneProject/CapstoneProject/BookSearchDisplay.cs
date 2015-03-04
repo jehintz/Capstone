@@ -11,21 +11,13 @@ namespace CapstoneProject
     //are automatically turned into columns on the DataGrid)
     class BookSearchDisplay : IComparable<BookSearchDisplay>
     {
-        //Private variables
-        private string _title;
-        private int _bookID;
-        private string _author;
-        private string _publisher;
-        private int _year;
-        private string _availability;       
-
         //Public properties
-        public string Title { get { return _title; } set { _title = value; } }
-        public int ID { get { return _bookID; } set { _bookID = value; } }
-        public string Author { get { return _author; } set { _author = value; } }
-        public string Publisher { get { return _publisher; } set { _publisher = value; } }
-        public int Year { get { return _year; } set { _year = value; } }
-        public string Availability { get { return _availability; } set { _availability = value; } }
+        public string Title { get; private set; }
+        public int ID { get; private set; }
+        public string Author { get; private set; }
+        public string Publisher { get; private set; }
+        public int Year { get; private set; }
+        public string Availability { get; private set; }
 
         //Constructor that takes a Book and a Person
         public BookSearchDisplay(Books b, People a)
