@@ -82,7 +82,7 @@ namespace CapstoneProject
             }
 
             //If text has been entered in the ISBN Search text box, compare the entered ISBN to all existing books within the catalog
-            if (isbnEntryTextBox.Text != null && isbnEntryTextBox.Text.Trim() != "")
+            if (!string.IsNullOrWhiteSpace(isbnEntryTextBox.Text))
             {
                 foreach (var b in cols.BookCollection.BookList)
                 {
@@ -102,7 +102,7 @@ namespace CapstoneProject
                     }
                 }
 
-                if (titleEntryTextBox.Text == null || titleEntryTextBox.Text == "")
+                if (string.IsNullOrEmpty(titleEntryTextBox.Text))
                 {
                     MessageBoxResult result = MessageBox.Show("No book with the entered ISBN currently exists in the catalog. Would you like to add it?",
                         "ISBN Not Found", MessageBoxButton.YesNo);
@@ -292,7 +292,7 @@ namespace CapstoneProject
         private void firstNameEntryBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             firstNameComboBox.Items.Clear();
-            if (firstNameEntryBox.Text != null && firstNameEntryBox.Text != "")
+            if (!string.IsNullOrWhiteSpace(firstNameEntryBox.Text))
             {
                 foreach (var p in cols.PeopleCollection.PeopleList)
                 {
@@ -322,7 +322,7 @@ namespace CapstoneProject
         private void lastNameEntryBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             lastNameComboBox.Items.Clear();
-            if (lastNameEntryBox.Text != null && lastNameEntryBox.Text != "")
+            if (!string.IsNullOrWhiteSpace(lastNameEntryBox.Text))
             {
                 foreach (var p in cols.PeopleCollection.PeopleList)
                 {
@@ -384,8 +384,7 @@ namespace CapstoneProject
         //the entry of a bio when a new author is being added
         private void CheckIfNewAuthor()
         {
-            if (firstNameEntryBox.Text != null || firstNameEntryBox.Text != "" ||
-                lastNameEntryBox.Text != null || lastNameEntryBox.Text != "")
+            if (!string.IsNullOrWhiteSpace(firstNameEntryBox.Text) || !string.IsNullOrWhiteSpace(lastNameEntryBox.Text))
             {
                 foreach (var p in cols.PeopleCollection.PeopleList)
                 {
@@ -481,7 +480,7 @@ namespace CapstoneProject
         //METHOD: Ensure all data entered by the librarian is valid/exists
         private bool ValidateData()
         {
-            if (titleEntryTextBox.Text == null || titleEntryTextBox.Text == "")
+            if (string.IsNullOrWhiteSpace(titleEntryTextBox.Text))
             {
                 errorLabel.Content = "Please enter a title.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -496,7 +495,7 @@ namespace CapstoneProject
                 return false;
             }
 
-            if (languageEntryBox.Text == null || languageEntryBox.Text == "")
+            if (string.IsNullOrEmpty(languageEntryBox.Text))
             {
                 errorLabel.Content = "Please enter the book's language.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -505,8 +504,7 @@ namespace CapstoneProject
             }
 
             //Make sure the author's first and last name was entered
-            if (firstNameEntryBox.Text == null || firstNameEntryBox.Text == "" ||
-                lastNameEntryBox.Text == null || lastNameEntryBox.Text == "")
+            if (string.IsNullOrWhiteSpace(firstNameEntryBox.Text) || string.IsNullOrWhiteSpace(lastNameEntryBox.Text))
             {
                 errorLabel.Content = "Please enter the author's full name (first and last).";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -515,13 +513,13 @@ namespace CapstoneProject
             }
             else if (firstNameEntryBox.Text.Length > 25 || lastNameEntryBox.Text.Length > 25)
             {
-                errorLabel.Content = "The author's first or last name cannot exceed 25 characters.";
+                errorLabel.Content = "The author's first/last name cannot exceed 25 characters.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
                 firstNameEntryBox.Focus();
                 return false;
             }
 
-            if (bioEntryBox.Visibility == System.Windows.Visibility.Visible && (bioEntryBox.Text == null || bioEntryBox.Text == ""))
+            if (bioEntryBox.Visibility == System.Windows.Visibility.Visible && string.IsNullOrWhiteSpace(bioEntryBox.Text))
             {
                 errorLabel.Content = "To add a new author to the system, a brief author bio must be included.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -537,7 +535,7 @@ namespace CapstoneProject
             }
 
             //Make sure a publisher was entered
-            if (publisherEntryBox.Text == null || publisherEntryBox.Text == "")
+            if (string.IsNullOrEmpty(publisherEntryBox.Text))
             {
                 errorLabel.Content = "Please enter a publisher.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -546,7 +544,7 @@ namespace CapstoneProject
             }
 
             //Make sure a published year was entered
-            if (yearEntryBox.Text == null || yearEntryBox.Text == "")
+            if (string.IsNullOrEmpty(publisherEntryBox.Text))
             {
                 errorLabel.Content = "Please enter the year the book was published.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -564,15 +562,15 @@ namespace CapstoneProject
                 return false;
             }
             //Make sure the entered year falls between 0 and the current year
-            else if (yearInt < 0 || yearInt > DateTime.Now.Year)
+            else if (yearInt < 1400 || yearInt > DateTime.Now.Year)
             {
-                errorLabel.Content = "The published year must be between 0 and " + DateTime.Now.Year + ".";
+                errorLabel.Content = "The published year must be between 1400 and " + DateTime.Now.Year + ".";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
                 yearEntryBox.Focus();
                 return false;
             }
 
-            if (pagesEntryBox.Text == null || pagesEntryBox.Text == "")
+            if (string.IsNullOrEmpty(pagesEntryBox.Text))
             {
                 errorLabel.Content = "Please enter the number of pages.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -625,7 +623,7 @@ namespace CapstoneProject
             }
 
             //Make sure a subject was chosen or entered
-            if (subjectComboBox.SelectedIndex < 0 || (subjectComboBox.SelectedIndex == subjectComboBox.Items.Count - 1 && (subjectEntryBox.Text == null || subjectEntryBox.Text == "")))
+            if (subjectComboBox.SelectedIndex < 0 || (subjectComboBox.SelectedIndex == subjectComboBox.Items.Count - 1 && string.IsNullOrWhiteSpace(subjectEntryBox.Text)))
             {
                 errorLabel.Content = "Please select or enter a subject.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -634,7 +632,7 @@ namespace CapstoneProject
             }
 
             //Make sure a description was entered
-            if (descriptionEntryBox.Text == null || descriptionEntryBox.Text == "")
+            if (string.IsNullOrWhiteSpace(descriptionEntryBox.Text))
             {
                 errorLabel.Content = "Please enter a brief description of the book.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;

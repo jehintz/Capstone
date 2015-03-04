@@ -57,7 +57,7 @@ namespace CapstoneProject
             bool isbnFound = false;
 
             //If the ISBN Entry Box is empty, display an error message
-            if (isbnEntryBox.Text == null || isbnEntryBox.Text == "")
+            if (string.IsNullOrWhiteSpace(isbnEntryBox.Text))
             {
                 errorLabel.Content = "Please enter an ISBN.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -158,7 +158,7 @@ namespace CapstoneProject
             errorLabel.Visibility = System.Windows.Visibility.Hidden;
 
             //If no Card ID was entered, display an error message
-            if (cardIDEntryBox.Text == null || cardIDEntryBox.Text == "")
+            if (string.IsNullOrWhiteSpace(cardIDEntryBox.Text))
             {
                 errorLabel.Content = "Please enter a card ID.";
                 errorLabel.Visibility = System.Windows.Visibility.Visible;

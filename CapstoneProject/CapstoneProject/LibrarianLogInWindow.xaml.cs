@@ -35,15 +35,28 @@ namespace CapstoneProject
 
         private void logInButton_Click(object sender, RoutedEventArgs e)
         {
-            //PeopleCollection pc = new PeopleCollection();
             bool isLoggedIn = false;
             bool validUserID = false;
 
-            foreach(var person in cols.PeopleCollection.PeopleList)
+            if(string.IsNullOrWhiteSpace(userIDTextBox.Text))
             {
-                if (person is Librarians)
+                errorLabel.Content = "Enter a User ID.";
+                userIDTextBox.Focus();
+                return;
+            }
+
+            if(string.IsNullOrWhiteSpace(passwordTextBox.Password))
+            {
+                errorLabel.Content = "Enter a password.";
+                passwordTextBox.Focus();
+                return;
+            }
+
+            foreach(var p in cols.PeopleCollection.PeopleList)
+            {
+                if (p is Librarians)
                 {
-                    Librarians librarian = person as Librarians;
+                    Librarians librarian = p as Librarians;
                     if (userIDTextBox.Text.ToUpper() == librarian.UserID.ToUpper() && passwordTextBox.Password == librarian.Password)
                     {
                         isLoggedIn = true;

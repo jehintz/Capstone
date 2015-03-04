@@ -41,7 +41,7 @@ namespace CapstoneProject
             idErrorLabel.Visibility = System.Windows.Visibility.Hidden;
 
             //If no Library Card ID was entered, display an error message
-            if (cardIDEntryBox.Text == null || cardIDEntryBox.Text == "")
+            if (string.IsNullOrWhiteSpace(cardIDEntryBox.Text))
             {
                 idErrorLabel.Content = "Please enter an ID.";
                 idErrorLabel.Visibility = System.Windows.Visibility.Visible;
