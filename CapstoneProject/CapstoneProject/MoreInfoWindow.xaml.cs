@@ -17,15 +17,22 @@ namespace CapstoneProject
     /// <summary>
     /// Interaction logic for MoreInfoWindow.xaml
     /// </summary>
+    /// 
+    //Window that gives detailed information on a given book
     public partial class MoreInfoWindow : Window
     {
         private int incomingBookID;
 
+        //START: More Info window opened
         public MoreInfoWindow(int bookID)
         {
             InitializeComponent();
+
+
             Collections cols = new Collections();
-            incomingBookID = bookID;
+            incomingBookID = bookID;  //Will need this if a librarian wants to edit a book's info
+            
+            //Get the information associated with the incoming book and display it
             foreach (var b in cols.BookCollection.BookList)
             {
                 if (b.BookID == bookID)
@@ -50,16 +57,21 @@ namespace CapstoneProject
                 }
             }
 
+            //If the user is logged in as a librarian, display the Edit Book Info button
             if (Status.IsLibrarian == true)
             {
                 editButton.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
+        //EVENT: Edit button clicked
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
+            //Open a new Edit Window with the ID of the book presently being displayed as the argument
             EditWindow ew = new EditWindow(incomingBookID);
             ew.Show();
+
+            //Close this window
             this.Close();
         }
     }

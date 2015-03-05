@@ -77,11 +77,16 @@ namespace CapstoneProject
                 }
             }
 
+            //Search the books for a matching ISBN
             foreach(var b in cols.BookCollection.BookList)
             {
+                //Only counts as a match if the number of copies is greater than 0 (otherwise the book is 'retained info only' and no longer
+                //exists in the library catalog to be checked out)
                 if (isbnEntryBox.Text.Trim() == b.ISBN && b.NumberOfCopies > 0)
                 {
                     isbnFound = true;
+
+                    //Check that there is at least one copy available for check out
                     if (b.Availability < 1)
                     {
                         errorLabel.Content = "All copies of this book are already checked out.";
@@ -91,6 +96,7 @@ namespace CapstoneProject
                     }
                     else
                     {
+                        //Ensure the cardholder does not already have another copy of the same book checked out
                         foreach (var co in cols.CheckedOutCollection.CheckedOutList)
                         {
                             if (co.CardholderID == cardHolderID && co.BookID == b.BookID)
@@ -101,6 +107,8 @@ namespace CapstoneProject
                                 return;
                             }
                         }
+                        //Prevent the librarian from adding the same book twice in the same check out session (again so the cardholder cannot
+                        //have two copies of the same book)
                         foreach (var co in tempCheckOutLog)
                         {
                             if (co.CardholderID == cardHolderID && co.BookID == b.BookID)
@@ -112,9 +120,10 @@ namespace CapstoneProject
                             }
                         }
 
+                        //If all checks are passed, display the book's title in the listbox
                         checkOutList.Items.Add(b.Title);
-                        //TODO: Find a way to get the logID that actually works. This results in multiple "1" logIDs because this is searching
-                        //against the main list without adding each new book to it (therefore filling in "1" so the next one can be "2" etc.)
+
+                        //Get a unique Log ID for the new CheckOutLog by finding the smallest available int among existing Log IDs
                         for (int i = logID + 1; i <= 1000; i++)
                         {
                             bool alreadyExists = false;
@@ -132,8 +141,13 @@ namespace CapstoneProject
                                 break;
                             }
                         }
+
+                        //Create a CheckOutLog with the appropriate information and add it to the temporary list
                         CheckOutLog checkOut = new CheckOutLog(logID, cardHolderID, b.BookID, DateTime.Now);
                         tempCheckOutLog.Add(checkOut);
+
+                        //Empty the ISBN Entry textbox of all text and place the text cursor there in case the librarian wishes to add
+                        //another book
                         isbnEntryBox.Clear();
                         isbnEntryBox.Focus();
                     }
@@ -141,6 +155,7 @@ namespace CapstoneProject
                 }
             }
 
+            //If no matching ISBN was found, display an error message
             if (!isbnFound)
             {
                 errorLabel.Content = "ISBN not found.";
@@ -166,6 +181,7 @@ namespace CapstoneProject
                 return;
             }
 
+            //Check for a matching Library Card ID among the cardholders
             foreach (var p in cols.PeopleCollection.PeopleList)
             {
                 if (p is Cardholders)
@@ -174,12 +190,16 @@ namespace CapstoneProject
                     if (temp.LibraryCardID.ToUpper() == cardIDEntryBox.Text.Trim().ToUpper())
                     {
                         idFound = true;
+
+                        //If the found cardholder currently has overdue books, display an error message
                         if (CheckForOverdueBooks(temp.PersonID))
                         {
                             errorLabel.Content = "This patron has overdue books and cannot check out more at this time.";
                             errorLabel.Visibility = System.Windows.Visibility.Visible;
                             cardIDEntryBox.Focus();
                         }
+                        //If the cardholder was found and they have no overdue books, disable the button that allows librarians to search
+                        //for cardholders, and instead enable the button that allows librarians to add books to check out
                         else
                         {
                             cardHolderID = temp.PersonID;
@@ -198,6 +218,7 @@ namespace CapstoneProject
                 }
             }
 
+            //If no cardholder with a matching Library Card ID was found, display an error message
             if (!idFound)
             {
                 errorLabel.Content = "ID not found.";
@@ -209,7 +230,11 @@ namespace CapstoneProject
         //EVENT: Check out button clicked
         private void checkOutButton_Click(object sender, RoutedEventArgs e)
         {
+            //Display a dialog box so the librarian can confirm they want to check out the entered books
             MessageBoxResult result = MessageBox.Show("Checking out " + tempCheckOutLog.Count + " book(s). Proceed?", "Finalize Check Out", MessageBoxButton.YesNo);
+
+            //If the librarian selected 'Yes' and does want to finalize check out, add all books in the temporary check out log to both the
+            //collections and database
             if (result == MessageBoxResult.Yes)
             {
                 foreach (var col in tempCheckOutLog)
@@ -218,6 +243,8 @@ namespace CapstoneProject
                     db.CheckOutLog.Add(col);
                     db.SaveChanges();
                 }
+
+                //Now that the checkouts have been finalized, close the window
                 this.Close();
             }
         }

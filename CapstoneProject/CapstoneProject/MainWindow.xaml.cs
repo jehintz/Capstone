@@ -19,6 +19,8 @@ namespace CapstoneProject
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+    //Window that displays on application launch
     public partial class MainWindow : Window
     {
         //START: Tasks to be completed before the Main Window is displayed upon launch
@@ -269,6 +271,7 @@ namespace CapstoneProject
         //EVENT: Check Out button clicked
         private void checkOutButton_Click(object sender, RoutedEventArgs e)
         {
+            //Open a new window to check out books
             CheckOutWindow cow = new CheckOutWindow();
             cow.Show();
         }
@@ -276,12 +279,15 @@ namespace CapstoneProject
         //EVENT: View Overdue button clicked
         private void overdueButton_Click(object sender, RoutedEventArgs e)
         {
+            //Open a new window to view a list of overdue books
             OverdueWindow ow = new OverdueWindow();
             ow.Show();
         }
 
+        //EVENT Directory button clicked
         private void directoryButton_Click(object sender, RoutedEventArgs e)
         {
+            //Open a new window with directory (person) information
             DirectoryWindow dw = new DirectoryWindow();
             dw.Show();
         }

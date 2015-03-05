@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CapstoneProject
 {
+
+    //Extends the automatically generated People class to make it abstract, allow for sorting, and override the default ToString()
     abstract partial class People : IComparable<People>
     {
         //Empty constructor
@@ -13,7 +15,6 @@ namespace CapstoneProject
         {
         }
 
-        // : this() ...? doesn't seem to be necessary
         //Constructor
         public People(int personID, string firstName, string lastName)
         {
@@ -22,16 +23,21 @@ namespace CapstoneProject
             this.LastName = lastName;
         }
 
+        //ToString() override
         public override string ToString()
         {
+            //returns ' lastName, firstName '
             return this.LastName + ", " + this.FirstName;
         }
 
+        //Implementation of IComparable
         public int CompareTo(People other)
         {
+            //If the name being compared is null, the name that does exist is "greater"
             if (other == null)
                 return 1;
 
+            //When comparing two People, sort by Last Name, then First Name
             if (LastName.CompareTo(other.LastName) == 0)
                 return FirstName.CompareTo(other.FirstName);
             else

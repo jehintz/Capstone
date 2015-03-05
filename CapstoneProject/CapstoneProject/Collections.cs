@@ -149,20 +149,25 @@ namespace CapstoneProject
             //Ensure the given resultsList is clear of any items
             resultsList = new List<BookSearchDisplay>();
 
+            //Find any books that contain the incoming query in the Title
             foreach (Books b in BookCollection.BookList)
             {
                 if (b.Title.ToUpper().Contains(query.ToUpper()) && b.NumberOfCopies > 0)
                 {
+                    //If a book is found, get the book's author
                     foreach (var a in PeopleCollection.PeopleList)
                     {
                         if (b.AuthorID == a.PersonID)
                         {
+                            //Add the result to the BookSearchDisplay list
                             var result = new BookSearchDisplay(b, a);
                             resultsList.Add(result);
                         }
                     }
                 }
             }
+
+            //Perform a sort on the results list
             resultsList.Sort();
         }
 
@@ -172,12 +177,14 @@ namespace CapstoneProject
             //Ensure the given resultsList is clear of any items
             resultsList = new List<BookSearchDisplay>();
 
+            //Find any authors that contain the incoming query in their first or last name
             foreach (People p in PeopleCollection.PeopleList)
             {
                 if (p is Authors)
                 {
                     if (p.FirstName.ToUpper().Contains(query.ToUpper()) || p.LastName.ToUpper().Contains(query.ToUpper()))
                     {
+                        //If an author was found, add each of their books to the results list
                         foreach (var b in _bookCollection.BookList)
                         {
                             if (b.AuthorID == p.PersonID && b.NumberOfCopies > 0)
@@ -189,14 +196,18 @@ namespace CapstoneProject
                     }
                 }
             }
+
+            //Perform a sort on the results list
             resultsList.Sort();
         }
 
+        //METHOD: Searches for a match in each books Author ID and adds all matches to a list of Books
         internal void BookSearchByAuthor (int personID, out List<Books> resultsList)
         {
             //Ensure the given resultsList is clear of any items
             resultsList = new List<Books>();
 
+            //Add each book to the results list where the Author ID is the same as the incoming Person ID
             foreach (var b in BookCollection.BookList)
             {
                 if (b.AuthorID == personID)
@@ -204,6 +215,8 @@ namespace CapstoneProject
                     resultsList.Add(b);
                 }
             }
+
+            //Perform a sort on the results list
             resultsList.Sort();
         }
 
@@ -213,20 +226,25 @@ namespace CapstoneProject
             //Ensure the given resultsList is clear of any items
             resultsList = new List<BookSearchDisplay>();
 
+            //Find any books that contain the incoming query in their ISBN
             foreach (Books b in BookCollection.BookList)
             {
                 if (b.ISBN.ToString().Contains(query) && b.NumberOfCopies > 0)
                 {
+                    //If a book match was found, get that book's author
                     foreach (var a in _peopleCollection.PeopleList)
                     {
                         if (b.AuthorID == a.PersonID)
                         {
+                            //Create a new BookSearchDisplay with the book and author info and add it to the results list
                             var result = new BookSearchDisplay(b, a);
                             resultsList.Add(result);
                         }
                     }
                 }
             }
+
+            //Perform a sort on the results list
             resultsList.Sort();
         }
 
@@ -249,11 +267,15 @@ namespace CapstoneProject
                     }
                 }
             }
+
+            //Perform a sort on the results list
             resultsList.Sort();
         }
 
+        //METHOD: Searches for a matching book from a given Book ID
         internal Books BookSearchByID (int bookID)
         {
+            //Find the book that has the incoming Book ID
             foreach (Books b in BookCollection.BookList)
             {
                 if (b.BookID == bookID)
@@ -262,14 +284,19 @@ namespace CapstoneProject
                 }
             }
             
+            //If no book with that Book ID was found, return null
             return null;
         }
 
+        //METHOD: Get a list of all books a cardholder has checked out using their Library Card ID, and add the results to a list of CheckInDisplays
         internal bool LogSearchByLibraryCardID (string cardID, out List<CheckInDisplay> resultsList)
         {
             //Ensure the given resultsList is clear of any items
             resultsList = new List<CheckInDisplay>();
+
             bool idFound = false;
+
+            //Find the cardholder with a matching Library Card ID
             foreach (var p in PeopleCollection.PeopleList)
             {
                 if (p is Cardholders)
@@ -278,14 +305,17 @@ namespace CapstoneProject
                     if (cardID.Trim().ToUpper() == temp.LibraryCardID.ToUpper())
                     {
                         idFound = true;
+                        //If a matching cardholder was found, find what they have checked out in the CheckOutLog collection
                         foreach (var co in CheckedOutCollection.CheckedOutList)
                         {
                             if (co.CardholderID == temp.PersonID)
                             {
+                                //If the cardholder has a book checked out, get that book's information
                                 foreach (var b in BookCollection.BookList)
                                 {
                                     if (b.BookID == co.BookID)
                                     {
+                                        //Create a new CheckInDisplay with the appropriate information, and add it to the results list
                                         resultsList.Add(new CheckInDisplay(co.CheckOutLogID, b.BookID, b.Title, co.Status));
                                         break;
                                     }
@@ -293,10 +323,12 @@ namespace CapstoneProject
                             }
                         }
                     }
+                    //If the given Library Card ID was found, return true
                     if (idFound)
                         return true;
                 }
             }
+            //If the given Library Card ID was not found, return false
             return false;
         }
     }

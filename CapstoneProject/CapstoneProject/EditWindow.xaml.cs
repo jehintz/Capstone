@@ -28,7 +28,7 @@ namespace CapstoneProject
         private int copiesInt = 0;
         private int numberCheckedOutInt = 0;
 
-        //START: Code to execute when the window loads
+        //START: Edit Window opened
         public EditWindow()
         {
             InitializeComponent();
@@ -40,6 +40,7 @@ namespace CapstoneProject
             isbnEntryTextBox.Focus();
         }
 
+        //START: Edit Window opened with a Book ID as an argument
         public EditWindow(int bookID)
         {
             InitializeComponent();
@@ -50,8 +51,11 @@ namespace CapstoneProject
             isbnLabel.Content = "ISBN";
             searchButton.Visibility = System.Windows.Visibility.Hidden;
 
+            //Display the incoming book's ISBN in the appropriate text box
             Books incomingBook = cols.BookSearchByID(bookID);
             isbnEntryTextBox.Text = incomingBook.ISBN;
+
+            //Display the rest of the book's data
             LoadBookData(incomingBook);
         }
 
@@ -60,8 +64,11 @@ namespace CapstoneProject
         {
             //Clear any existing data in the text boxes
             DisableControls();
+
+            //Clear any existing error messages
             isbnErrorLabel.Visibility = System.Windows.Visibility.Hidden;
 
+            //Check that the enter ISBN is less than 25 characters. If longer, display an error message
             if (isbnEntryTextBox.Text.Length > 25)
             {
                 isbnErrorLabel.Visibility = System.Windows.Visibility.Visible;
@@ -70,6 +77,7 @@ namespace CapstoneProject
                 return;
             }
 
+            //Check that the entered ISBN only includes numbers. If not, display an error message
             foreach (char c in isbnEntryTextBox.Text.ToCharArray())
             {
                 if (!char.IsDigit(c))
@@ -732,7 +740,7 @@ namespace CapstoneProject
                     break;
                 }
             }
-            //cols.BookCollection.BookList[0] = newBook;
+
             Books dbBook = (from b in db.Books where b.BookID == newBook.BookID select b).FirstOrDefault();
             dbBook.Title = newBook.Title;
             dbBook.AuthorID = newBook.AuthorID;
