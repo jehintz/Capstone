@@ -92,7 +92,7 @@ namespace CapstoneProject
             //If text has been entered in the ISBN Search text box, compare the entered ISBN to all existing books within the catalog
             if (!string.IsNullOrWhiteSpace(isbnEntryTextBox.Text))
             {
-                foreach (var b in cols.BookCollection.BookList)
+                foreach (var b in cols.BookCollection)
                 {
                     //If a book with a matching ISBN has been found in the catalog, load that book's information into the appropriate
                     //text boxes
@@ -253,7 +253,7 @@ namespace CapstoneProject
                         "Remove Book", MessageBoxButton.YesNo);
                     if (result2 == MessageBoxResult.Yes)
                     {
-                        foreach (var b in cols.BookCollection.BookList)
+                        foreach (var b in cols.BookCollection)
                         {
                             if (isbnEntryTextBox.Text.Trim() == b.ISBN)
                             {
@@ -274,7 +274,7 @@ namespace CapstoneProject
                     if (result == MessageBoxResult.Yes)
                     {
                         bool existingBook = false;
-                        foreach (var b in cols.BookCollection.BookList)
+                        foreach (var b in cols.BookCollection)
                         {
                             if (isbnEntryTextBox.Text.Trim() == b.ISBN)
                             {
@@ -426,7 +426,7 @@ namespace CapstoneProject
             //Load the subject of every book into a temporary list, sort the list alphabetically, then load all non-duplicates
             //into the Subject combo box
             List<string> temp = new List<string>();
-            foreach (var b in cols.BookCollection.BookList)
+            foreach (var b in cols.BookCollection)
             {
                 temp.Add(b.Subject);
             }
@@ -690,10 +690,10 @@ namespace CapstoneProject
             {
                 newSubject = subjectEntryBox.Text.Trim();
             }
-            Books newBook = new Books(cols.BookCollection.BookList.Count + 1, isbnEntryTextBox.Text.Trim(), titleEntryTextBox.Text.Trim(),
+            Books newBook = new Books(cols.BookCollection.Count + 1, isbnEntryTextBox.Text.Trim(), titleEntryTextBox.Text.Trim(),
                 newAuthorID, int.Parse(pagesEntryBox.Text.Trim()), newSubject, descriptionEntryBox.Text.Trim(), publisherEntryBox.Text.Trim(),
                 int.Parse(yearEntryBox.Text.Trim()), languageEntryBox.Text.Trim(), int.Parse(copiesEntryBox.Text.Trim()));
-            cols.BookCollection.BookList[0] = newBook;
+            cols.BookCollection[0] = newBook;
             db.Books.Add(newBook);
             db.SaveChanges();
         }
@@ -732,11 +732,11 @@ namespace CapstoneProject
             Books newBook = new Books(bookID, isbnEntryTextBox.Text.Trim(), titleEntryTextBox.Text.Trim(),
                 newAuthorID, int.Parse(pagesEntryBox.Text.Trim()), newSubject, descriptionEntryBox.Text.Trim(), publisherEntryBox.Text.Trim(),
                 int.Parse(yearEntryBox.Text.Trim()), languageEntryBox.Text.Trim(), int.Parse(copiesEntryBox.Text.Trim()));
-            for (int i = 0; i <= cols.BookCollection.BookList.Count; i++)
+            for (int i = 0; i <= cols.BookCollection.Count; i++)
             {
-                if (cols.BookCollection.BookList[i].BookID == newBook.BookID)
+                if (cols.BookCollection[i].BookID == newBook.BookID)
                 {
-                    cols.BookCollection.BookList[i] = newBook;
+                    cols.BookCollection[i] = newBook;
                     break;
                 }
             }

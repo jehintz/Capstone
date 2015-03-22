@@ -35,7 +35,7 @@ namespace CapstoneProject
                 if (co.Status == "OVERDUE")
                 {
                     //Get the book info for that Log if it IS overdue
-                    foreach (var b in cols.BookCollection.BookList)
+                    foreach (var b in cols.BookCollection)
                     {
                         if (b.BookID == co.BookID)
                         {

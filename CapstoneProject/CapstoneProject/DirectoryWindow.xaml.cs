@@ -85,7 +85,7 @@ namespace CapstoneProject
                     {
                         if (co.CardholderID == p.PersonID)
                         {
-                            foreach (var b in cols.BookCollection.BookList)
+                            foreach (var b in cols.BookCollection)
                             {
                                 if (co.BookID == b.BookID)
                                 {

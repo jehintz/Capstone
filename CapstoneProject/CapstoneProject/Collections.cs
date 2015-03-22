@@ -35,8 +35,8 @@ namespace CapstoneProject
             try
             {
                 //Clear all collections before (re)writing to them so there are no duplicates
-                _bookCollection.BookList.Clear();
-                //_peopleCollection.PeopleList.Clear();
+                _bookCollection.Clear();
+                _peopleCollection.Clear();
                 _checkedOutCollection.CheckedOutList.Clear();
 
                 //Query the database to retrieve all People
@@ -54,7 +54,7 @@ namespace CapstoneProject
                         PeopleCollection[0] = p as Cardholders;
                 }
                 //Now that all people have been added, perform a sort
-                //PeopleCollection.PeopleList.Sort();
+                PeopleCollection.Sort();
 
                 //Query the database to retrieve all Books
                 var bookObjects = from b in db.Books select b;
@@ -64,7 +64,7 @@ namespace CapstoneProject
                     _bookCollection[0] = b;
                 }
                 //Now that all books have been added, perform a sort
-                BookCollection.BookList.Sort();
+                BookCollection.Sort();
 
                 //Query the database to retrieve all CheckedOutLogs
                 var checkedOutObjects = from co in db.CheckOutLog select co;
@@ -90,7 +90,7 @@ namespace CapstoneProject
             resultsList = new List<BookSearchDisplay>();
 
             //Go through each book and search for a match between the given Query and the book's Title, Subject, or ISBN
-            foreach (Books b in BookCollection.BookList)
+            foreach (Books b in BookCollection)
             {
                 if ((b.Title.ToUpper().Contains(query.ToUpper()) || b.Subject.ToUpper().Contains(query.ToUpper()) || b.ISBN.ToString().Contains(query))
                     && b.NumberOfCopies > 0)
@@ -114,7 +114,7 @@ namespace CapstoneProject
                 {
                     if (p.FirstName.ToUpper().Contains(query.ToUpper()) || p.LastName.ToUpper().Contains(query.ToUpper()))
                     {
-                        foreach (var b in BookCollection.BookList)
+                        foreach (var b in BookCollection)
                         {
                             //If a match is found, get each book that the author has written
                             if (b.AuthorID == p.PersonID && b.NumberOfCopies > 0)
@@ -150,7 +150,7 @@ namespace CapstoneProject
             resultsList = new List<BookSearchDisplay>();
 
             //Find any books that contain the incoming query in the Title
-            foreach (Books b in BookCollection.BookList)
+            foreach (Books b in BookCollection)
             {
                 if (b.Title.ToUpper().Contains(query.ToUpper()) && b.NumberOfCopies > 0)
                 {
@@ -185,7 +185,7 @@ namespace CapstoneProject
                     if (p.FirstName.ToUpper().Contains(query.ToUpper()) || p.LastName.ToUpper().Contains(query.ToUpper()))
                     {
                         //If an author was found, add each of their books to the results list
-                        foreach (var b in _bookCollection.BookList)
+                        foreach (var b in _bookCollection)
                         {
                             if (b.AuthorID == p.PersonID && b.NumberOfCopies > 0)
                             {
@@ -208,7 +208,7 @@ namespace CapstoneProject
             resultsList = new List<Books>();
 
             //Add each book to the results list where the Author ID is the same as the incoming Person ID
-            foreach (var b in BookCollection.BookList)
+            foreach (var b in BookCollection)
             {
                 if (b.AuthorID == personID)
                 {
@@ -227,7 +227,7 @@ namespace CapstoneProject
             resultsList = new List<BookSearchDisplay>();
 
             //Find any books that contain the incoming query in their ISBN
-            foreach (Books b in BookCollection.BookList)
+            foreach (Books b in BookCollection)
             {
                 if (b.ISBN.ToString().Contains(query) && b.NumberOfCopies > 0)
                 {
@@ -253,7 +253,7 @@ namespace CapstoneProject
         {
             resultsList = new List<BookSearchDisplay>();
 
-            foreach (Books b in BookCollection.BookList)
+            foreach (Books b in BookCollection)
             {
                 if (b.Subject.ToUpper().Contains(query.ToUpper()) && b.NumberOfCopies > 0)
                 {
@@ -276,7 +276,7 @@ namespace CapstoneProject
         internal Books BookSearchByID (int bookID)
         {
             //Find the book that has the incoming Book ID
-            foreach (Books b in BookCollection.BookList)
+            foreach (Books b in BookCollection)
             {
                 if (b.BookID == bookID)
                 {
@@ -311,7 +311,7 @@ namespace CapstoneProject
                             if (co.CardholderID == temp.PersonID)
                             {
                                 //If the cardholder has a book checked out, get that book's information
-                                foreach (var b in BookCollection.BookList)
+                                foreach (var b in BookCollection)
                                 {
                                     if (b.BookID == co.BookID)
                                     {

@@ -33,7 +33,7 @@ namespace CapstoneProject
             incomingBookID = bookID;  //Will need this if a librarian wants to edit a book's info
             
             //Get the information associated with the incoming book and display it
-            foreach (var b in cols.BookCollection.BookList)
+            foreach (var b in cols.BookCollection)
             {
                 if (b.BookID == bookID)
                 {

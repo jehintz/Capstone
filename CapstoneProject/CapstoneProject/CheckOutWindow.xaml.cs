@@ -78,7 +78,7 @@ namespace CapstoneProject
             }
 
             //Search the books for a matching ISBN
-            foreach(var b in cols.BookCollection.BookList)
+            foreach(var b in cols.BookCollection)
             {
                 //Only counts as a match if the number of copies is greater than 0 (otherwise the book is 'retained info only' and no longer
                 //exists in the library catalog to be checked out)
