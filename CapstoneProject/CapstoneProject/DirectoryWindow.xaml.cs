@@ -89,8 +89,13 @@ namespace CapstoneProject
                             {
                                 if (co.BookID == b.BookID)
                                 {
+                                    string status;
+                                    if (co.IsOverdue)
+                                        status = "OVERDUE";
+                                    else
+                                        status = "On Time";
                                     par.Inlines.Add(new Run("\n\"" + b.Title + "\" (ID " + b.BookID + ")\n    ISBN " + b.ISBN +
-                                        "\n    Checked out " + co.CheckOutDate.ToShortDateString() + " (" + co.Status + ")"));
+                                        "\n    Checked out " + co.CheckOutDate.ToShortDateString() + " (" + status + ")"));
                                 }
                             }
                         }

@@ -32,7 +32,7 @@ namespace CapstoneProject
             foreach (var co in cols.CheckedOutCollection)
             {
                 //Check if the Log is overdue
-                if (co.Status == "OVERDUE")
+                if (co.IsOverdue)
                 {
                     //Get the book info for that Log if it IS overdue
                     foreach (var b in cols.BookCollection)

@@ -315,8 +315,13 @@ namespace CapstoneProject
                                 {
                                     if (b.BookID == co.BookID)
                                     {
+                                        string status;
+                                        if (co.IsOverdue)
+                                            status = "OVERDUE";
+                                        else
+                                            status = "On Time";
                                         //Create a new CheckInDisplay with the appropriate information, and add it to the results list
-                                        resultsList.Add(new CheckInDisplay(co.CheckOutLogID, b.BookID, b.Title, co.Status));
+                                        resultsList.Add(new CheckInDisplay(co.CheckOutLogID, b.BookID, b.Title, status));
                                         break;
                                     }
                                 }

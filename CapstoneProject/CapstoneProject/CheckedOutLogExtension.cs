@@ -9,16 +9,15 @@ namespace CapstoneProject
     //Extends the automatically generated CheckOutLog class to allow for sorting, override the default ToString(), and add an extra property.
     partial class CheckOutLog : IComparable<CheckOutLog>
     {
-        //New Status property that does not corellate to anything in the database. Returns a string that indicates whether the book in the
-        //current log instance is overdue or not.
-        public string Status
+        //New IsOverdue property that does not corellate to anything in the database. Can quickly determine of the current CheckOutLog is past due.
+        public bool IsOverdue
         {
             get
             {
                 if (DateTime.Now > CheckOutDate.AddDays(30))
-                    return "OVERDUE";
+                    return true;
                 else
-                    return "On Time";
+                    return false;
             }
         }
 

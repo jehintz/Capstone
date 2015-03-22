@@ -256,7 +256,7 @@ namespace CapstoneProject
             {
                 if (co.CardholderID == personID)
                 {
-                    if (co.Status == "OVERDUE")
+                    if (co.IsOverdue)
                     {
                         return true;
                     }
