@@ -488,174 +488,143 @@ namespace CapstoneProject
         //METHOD: Ensure all data entered by the librarian is valid/exists
         private bool ValidateData()
         {
-            if (string.IsNullOrWhiteSpace(titleEntryTextBox.Text))
+            try
             {
-                errorLabel.Content = "Please enter a title.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                titleEntryTextBox.Focus();
-                return false;
-            }
-            else if (titleEntryTextBox.Text.Length > 30)
-            {
-                errorLabel.Content = "The book's title cannot exceed 30 characters.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                titleEntryTextBox.Focus();
-                return false;
-            }
+                if (string.IsNullOrWhiteSpace(titleEntryTextBox.Text))
+                {
+                    titleEntryTextBox.Focus();
+                    throw new ArgumentException("Please enter a title.");
+                }
+                else if (titleEntryTextBox.Text.Length > 30)
+                {
+                    titleEntryTextBox.Focus();
+                    throw new ArgumentException("The book's title cannot exceed 30 characters.");
+                }
 
-            if (string.IsNullOrEmpty(languageEntryBox.Text))
-            {
-                errorLabel.Content = "Please enter the book's language.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                languageEntryBox.Focus();
-                return false;
-            }
+                if (string.IsNullOrEmpty(languageEntryBox.Text))
+                {
+                    languageEntryBox.Focus();
+                    throw new ArgumentException("Please enter the book's language.");
+                }
 
-            //Make sure the author's first and last name was entered
-            if (string.IsNullOrWhiteSpace(firstNameEntryBox.Text) || string.IsNullOrWhiteSpace(lastNameEntryBox.Text))
-            {
-                errorLabel.Content = "Please enter the author's full name (first and last).";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                firstNameEntryBox.Focus();
-                return false;
-            }
-            else if (firstNameEntryBox.Text.Length > 25 || lastNameEntryBox.Text.Length > 25)
-            {
-                errorLabel.Content = "The author's first/last name cannot exceed 25 characters.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                firstNameEntryBox.Focus();
-                return false;
-            }
+                //Make sure the author's first and last name was entered
+                if (string.IsNullOrWhiteSpace(firstNameEntryBox.Text) || string.IsNullOrWhiteSpace(lastNameEntryBox.Text))
+                {
+                    firstNameEntryBox.Focus();
+                    throw new ArgumentException("Please enter the author's full name (first and last).");
+                }
+                else if (firstNameEntryBox.Text.Length > 25 || lastNameEntryBox.Text.Length > 25)
+                {
+                    firstNameEntryBox.Focus();
+                    throw new ArgumentException("The author's first/last name cannot exceed 25 characters.");
+                }
 
-            if (bioEntryBox.Visibility == System.Windows.Visibility.Visible && string.IsNullOrWhiteSpace(bioEntryBox.Text))
-            {
-                errorLabel.Content = "To add a new author to the system, a brief author bio must be included.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                bioEntryBox.Focus();
-                return false;
-            }
-            else if (bioEntryBox.Text.Length > 100)
-            {
-                errorLabel.Content = "The author bio cannot be more than 100 characters.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                bioEntryBox.Focus();
-                return false;
-            }
+                if (bioEntryBox.Visibility == System.Windows.Visibility.Visible && string.IsNullOrWhiteSpace(bioEntryBox.Text))
+                {
+                    bioEntryBox.Focus();
+                    throw new ArgumentException("To add a new author to the system, a brief author bio must be included.");
+                }
+                else if (bioEntryBox.Text.Length > 100)
+                {
+                    bioEntryBox.Focus();
+                    throw new ArgumentException("The author bio cannot be more than 100 characters.");
+                }
 
-            //Make sure a publisher was entered
-            if (string.IsNullOrEmpty(publisherEntryBox.Text))
-            {
-                errorLabel.Content = "Please enter a publisher.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                publisherEntryBox.Focus();
-                return false;
-            }
+                //Make sure a publisher was entered
+                if (string.IsNullOrEmpty(publisherEntryBox.Text))
+                {
+                    publisherEntryBox.Focus();
+                    throw new ArgumentException("Please enter a publisher.");
+                }
 
-            //Make sure a published year was entered
-            if (string.IsNullOrEmpty(publisherEntryBox.Text))
-            {
-                errorLabel.Content = "Please enter the year the book was published.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                yearEntryBox.Focus();
-                return false;
-            }
+                //Make sure a published year was entered
+                if (string.IsNullOrEmpty(publisherEntryBox.Text))
+                {
+                    yearEntryBox.Focus();
+                    throw new ArgumentException("Please enter the year the book was published.");
+                }
 
-            //Make sure the entered year is an int
-            int yearInt = 0;
-            if (!int.TryParse(yearEntryBox.Text, out yearInt))
-            {
-                errorLabel.Content = "The published year can only contain numbers. (Ex: 1999)";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                yearEntryBox.Focus();
-                return false;
-            }
-            //Make sure the entered year falls between 0 and the current year
-            else if (yearInt < 1400 || yearInt > DateTime.Now.Year)
-            {
-                errorLabel.Content = "The published year must be between 1400 and " + DateTime.Now.Year + ".";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                yearEntryBox.Focus();
-                return false;
-            }
+                //Make sure the entered year is an int
+                int yearInt = 0;
+                if (!int.TryParse(yearEntryBox.Text, out yearInt))
+                {
+                    yearEntryBox.Focus();
+                    throw new ArgumentException("The published year can only contain numbers. (Ex: 1999)");
+                }
+                //Make sure the entered year falls between 0 and the current year
+                else if (yearInt < 1400 || yearInt > DateTime.Now.Year)
+                {
+                    yearEntryBox.Focus();
+                    throw new ArgumentException("The published year must be between 1400 and " + DateTime.Now.Year + ".");
+                }
 
-            if (string.IsNullOrEmpty(pagesEntryBox.Text))
-            {
-                errorLabel.Content = "Please enter the number of pages.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                pagesEntryBox.Focus();
-                return false;
-            }
+                if (string.IsNullOrEmpty(pagesEntryBox.Text))
+                {
+                    pagesEntryBox.Focus();
+                    throw new ArgumentException("Please enter the number of pages.");
+                }
 
-            int pagesInt = 0;
-            if (!int.TryParse(pagesEntryBox.Text, out pagesInt))
-            {
-                errorLabel.Content = "The number of pages must be a positive, whole number. (Ex: 375)";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                pagesEntryBox.Focus();
-                return false;
-            }
-            else if (pagesInt < 1)
-            {
-                errorLabel.Content = "The number of pages cannot be negative and must be greater than 1.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                pagesEntryBox.Focus();
-                return false;
-            }
+                int pagesInt = 0;
+                if (!int.TryParse(pagesEntryBox.Text, out pagesInt))
+                {
+                    pagesEntryBox.Focus();
+                    throw new ArgumentException("The number of pages must be a positive, whole number. (Ex: 375)");
+                }
+                else if (pagesInt < 1)
+                {
+                    pagesEntryBox.Focus();
+                    throw new ArgumentException("The book must have at least 1 page.");
+                }
 
-            //Make sure the number of copies is an int
-            int copiesInt = 0;
-            if (!int.TryParse(copiesEntryBox.Text, out copiesInt))
-            {
-                errorLabel.Content = "Please enter the number of copies. If the book is being removed from the catalog, enter 0.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                copiesEntryBox.Focus();
-                return false;
-            }
-            //Make sure the number of copies is not negative or over 100 (being a small library, 100+ copies of one book will not be needed)
-            else if (copiesInt < 0 || copiesInt > 100)
-            {
-                errorLabel.Content = "The number of copies must be between 0 and 100.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                copiesEntryBox.Focus();
-                return false;
-            }
-            else if (numberCheckedOutInt > int.Parse(copiesEntryBox.Text.Trim()))
-            {
-                if (numberCheckedOutInt == 1)
-                    errorLabel.Content = "1 copy of this book is currently checked out and cannot be removed from the system. Enter a number greater than 1.";
-                else
-                    errorLabel.Content = numberCheckedOutInt + " copies of this book are currently checked out and cannot be removed from the system. Enter a number greater than " + numberCheckedOutInt + ".";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                copiesEntryBox.Focus();
-                return false;
-            }
+                //Make sure the number of copies is an int
+                int copiesInt = 0;
+                if (!int.TryParse(copiesEntryBox.Text, out copiesInt))
+                {
+                    copiesEntryBox.Focus();
+                    throw new ArgumentException("Please enter the number of copies. If the book is being removed from the catalog, enter 0.");
+                }
+                //Make sure the number of copies is not negative or over 100 (being a small library, 100+ copies of one book will not be needed)
+                else if (copiesInt < 0 || copiesInt > 100)
+                {
+                    copiesEntryBox.Focus();
+                    throw new ArgumentException("The number of copies must be between 0 and 100.");
+                }
+                else if (numberCheckedOutInt > int.Parse(copiesEntryBox.Text.Trim()))
+                {
+                    copiesEntryBox.Focus();
+                    if (numberCheckedOutInt == 1)
+                        throw new ArgumentException("1 copy of this book is currently checked out and cannot be removed from the system. Enter a number greater than 1.");
+                    else
+                        throw new ArgumentException(numberCheckedOutInt + " copies of this book are currently checked out and cannot be removed from the system. Enter a number greater than " + numberCheckedOutInt + ".");
+                }
 
-            //Make sure a subject was chosen or entered
-            if (subjectComboBox.SelectedIndex < 0 || (subjectComboBox.SelectedIndex == subjectComboBox.Items.Count - 1 && string.IsNullOrWhiteSpace(subjectEntryBox.Text)))
-            {
-                errorLabel.Content = "Please select or enter a subject.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                subjectEntryBox.Focus();
-                return false;
-            }
+                //Make sure a subject was chosen or entered
+                if (subjectComboBox.SelectedIndex < 0 || (subjectComboBox.SelectedIndex == subjectComboBox.Items.Count - 1 && string.IsNullOrWhiteSpace(subjectEntryBox.Text)))
+                {
+                    subjectEntryBox.Focus();
+                    throw new ArgumentException("Please select or enter a subject.");
+                }
 
-            //Make sure a description was entered
-            if (string.IsNullOrWhiteSpace(descriptionEntryBox.Text))
-            {
-                errorLabel.Content = "Please enter a brief description of the book.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                descriptionEntryBox.Focus();
-                return false;
-            }
-            else if (descriptionEntryBox.Text.Length > 100)
-            {
-                errorLabel.Content = "The book's description cannot exceed 100 characters.";
-                errorLabel.Visibility = System.Windows.Visibility.Visible;
-                descriptionEntryBox.Focus();
-                return false;
-            }
+                //Make sure a description was entered
+                if (string.IsNullOrWhiteSpace(descriptionEntryBox.Text))
+                {
+                    descriptionEntryBox.Focus();
+                    throw new ArgumentException("Please enter a brief description of the book.");
+                }
+                else if (descriptionEntryBox.Text.Length > 100)
+                {
+                    descriptionEntryBox.Focus();
+                    throw new ArgumentException("The book's description cannot exceed 100 characters.");
+                }
 
-            return true;
+                return true;
+            }
+            catch (ArgumentException ex)
+            {
+                errorLabel.Content = ex.Message;
+                errorLabel.Visibility = System.Windows.Visibility.Visible;
+                return false;
+            }
         }
 
         //METHOD: Create a new book by retrieving the data entered by the librarian, then add it to the catalog and collection
