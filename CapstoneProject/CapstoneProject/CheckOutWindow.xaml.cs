@@ -97,7 +97,7 @@ namespace CapstoneProject
                     else
                     {
                         //Ensure the cardholder does not already have another copy of the same book checked out
-                        foreach (var co in cols.CheckedOutCollection.CheckedOutList)
+                        foreach (var co in cols.CheckedOutCollection)
                         {
                             if (co.CardholderID == cardHolderID && co.BookID == b.BookID)
                             {
@@ -127,7 +127,7 @@ namespace CapstoneProject
                         for (int i = logID + 1; i <= 1000; i++)
                         {
                             bool alreadyExists = false;
-                            foreach (var co in cols.CheckedOutCollection.CheckedOutList)
+                            foreach (var co in cols.CheckedOutCollection)
                             {
                                 if (i == co.CheckOutLogID)
                                 {
@@ -239,7 +239,7 @@ namespace CapstoneProject
             {
                 foreach (var col in tempCheckOutLog)
                 {
-                    cols.CheckedOutCollection.CheckedOutList[0] = col;
+                    cols.CheckedOutCollection[0] = col;
                     db.CheckOutLog.Add(col);
                     db.SaveChanges();
                 }
@@ -252,7 +252,7 @@ namespace CapstoneProject
         //METHOD: Check if a patron currently has any overdue books
         private bool CheckForOverdueBooks(int personID)
         {
-            foreach (var co in cols.CheckedOutCollection.CheckedOutList)
+            foreach (var co in cols.CheckedOutCollection)
             {
                 if (co.CardholderID == personID)
                 {

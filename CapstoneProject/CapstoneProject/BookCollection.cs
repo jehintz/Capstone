@@ -12,7 +12,7 @@ namespace CapstoneProject
         //Private list of books
         private List<Books> _bookList = new List<Books>();
 
-        //Add a Count property, since this is not inherant to IEnumerable
+        //Add functionality not inherant to IEnumerable
         public int Count
         {
             get { return _bookList.Count; }
@@ -27,12 +27,6 @@ namespace CapstoneProject
         {
             _bookList.Clear();
         }
-
-        ////Public property
-        //public List<Books> BookList
-        //{
-        //    get { return _bookList; }
-        //}
 
         //Allow for addition of new Books to the public lists using indexers
         public Books this[int index]

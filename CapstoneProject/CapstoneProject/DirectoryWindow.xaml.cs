@@ -81,7 +81,7 @@ namespace CapstoneProject
                     Cardholders ch = p as Cardholders;
                     par.Inlines.Add(new Bold(new Run(ch.ToString())));
                     //Include the cardholders' currently checked out books in their information
-                    foreach (var co in cols.CheckedOutCollection.CheckedOutList)
+                    foreach (var co in cols.CheckedOutCollection)
                     {
                         if (co.CardholderID == p.PersonID)
                         {

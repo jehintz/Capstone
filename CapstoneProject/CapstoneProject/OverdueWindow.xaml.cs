@@ -29,7 +29,7 @@ namespace CapstoneProject
             var cols = new Collections();
 
             //Loop through each CheckOutLog in the CheckedOutList
-            foreach (var co in cols.CheckedOutCollection.CheckedOutList)
+            foreach (var co in cols.CheckedOutCollection)
             {
                 //Check if the Log is overdue
                 if (co.Status == "OVERDUE")

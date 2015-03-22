@@ -19,7 +19,7 @@ namespace CapstoneProject
                 int count = 0;
 
                 //Each time the BookID of the current instance of Books appears in the CheckedOutList, increase the Count by 1
-                foreach (var co in cols.CheckedOutCollection.CheckedOutList)
+                foreach (var co in cols.CheckedOutCollection)
                 {
                     if (co.BookID == this.BookID)
                     {

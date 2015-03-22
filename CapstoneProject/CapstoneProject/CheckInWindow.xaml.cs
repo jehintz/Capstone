@@ -121,11 +121,11 @@ namespace CapstoneProject
                     CheckInDisplay selectedItem = (CheckInDisplay)item;
 
                     //Remove Check Out Log entry from the collections
-                    foreach (var log in cols.CheckedOutCollection.CheckedOutList)
+                    foreach (var log in cols.CheckedOutCollection)
                     {
                         if (log.CheckOutLogID == selectedItem.LogID)
                         {
-                            cols.CheckedOutCollection.CheckedOutList.Remove(log);
+                            cols.CheckedOutCollection.Remove(log);
                             break;
                         }
                     }

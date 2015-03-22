@@ -37,7 +37,7 @@ namespace CapstoneProject
                 //Clear all collections before (re)writing to them so there are no duplicates
                 _bookCollection.Clear();
                 _peopleCollection.Clear();
-                _checkedOutCollection.CheckedOutList.Clear();
+                _checkedOutCollection.Clear();
 
                 //Query the database to retrieve all People
                 var peopleObjects = from p in db.People select p;
@@ -74,7 +74,7 @@ namespace CapstoneProject
                     _checkedOutCollection[0] = co;
                 }
                 //Now that all the logs have been added, perform a sort
-                CheckedOutCollection.CheckedOutList.Sort();
+                CheckedOutCollection.Sort();
             }
             catch (Exception ex)
             {
@@ -306,7 +306,7 @@ namespace CapstoneProject
                     {
                         idFound = true;
                         //If a matching cardholder was found, find what they have checked out in the CheckOutLog collection
-                        foreach (var co in CheckedOutCollection.CheckedOutList)
+                        foreach (var co in CheckedOutCollection)
                         {
                             if (co.CardholderID == temp.PersonID)
                             {
