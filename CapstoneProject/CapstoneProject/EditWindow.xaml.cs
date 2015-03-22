@@ -302,7 +302,7 @@ namespace CapstoneProject
             firstNameComboBox.Items.Clear();
             if (!string.IsNullOrWhiteSpace(firstNameEntryBox.Text))
             {
-                foreach (var p in cols.PeopleCollection.PeopleList)
+                foreach (var p in cols.PeopleCollection)
                 {
                     if (p is Authors)
                     {
@@ -332,7 +332,7 @@ namespace CapstoneProject
             lastNameComboBox.Items.Clear();
             if (!string.IsNullOrWhiteSpace(lastNameEntryBox.Text))
             {
-                foreach (var p in cols.PeopleCollection.PeopleList)
+                foreach (var p in cols.PeopleCollection)
                 {
                     if (p is Authors)
                     {
@@ -394,7 +394,7 @@ namespace CapstoneProject
         {
             if (!string.IsNullOrWhiteSpace(firstNameEntryBox.Text) || !string.IsNullOrWhiteSpace(lastNameEntryBox.Text))
             {
-                foreach (var p in cols.PeopleCollection.PeopleList)
+                foreach (var p in cols.PeopleCollection)
                 {
                     if (p is Authors)
                     {
@@ -455,7 +455,7 @@ namespace CapstoneProject
             isbnLabel.IsEnabled = false;
             titleEntryTextBox.Text = b.Title;
             languageEntryBox.Text = b.Language;
-            foreach (var p in cols.PeopleCollection.PeopleList)
+            foreach (var p in cols.PeopleCollection)
             {
                 if (b.AuthorID == p.PersonID)
                 {
@@ -663,7 +663,7 @@ namespace CapstoneProject
         {
             //If the book's author already exists in the database, find that author's Person ID
             int newAuthorID = 0;
-            foreach (var p in cols.PeopleCollection.PeopleList)
+            foreach (var p in cols.PeopleCollection)
             {
                 if ((firstNameEntryBox.Text.Trim().ToUpper() == p.FirstName.ToUpper()) && (lastNameEntryBox.Text.Trim().ToUpper() == p.LastName.ToUpper()))
                 {
@@ -674,9 +674,9 @@ namespace CapstoneProject
             //If the book's author is new to the database, create a new Person ID and add it, with all their info, to the database
             if (newAuthorID == 0)
             {
-                newAuthorID = cols.PeopleCollection.PeopleList.Count + 1;
+                newAuthorID = cols.PeopleCollection.Count + 1;
                 Authors newAuthor = new Authors(newAuthorID, firstNameEntryBox.Text.Trim(), lastNameEntryBox.Text.Trim(), bioEntryBox.Text.Trim());
-                cols.PeopleCollection.PeopleList[0] = newAuthor;
+                cols.PeopleCollection[0] = newAuthor;
                 db.People.Add(newAuthor);
                 db.SaveChanges();
             }
@@ -702,7 +702,7 @@ namespace CapstoneProject
         {
             //If the book's author already exists in the database, find that author's Person ID
             int newAuthorID = 0;
-            foreach (var p in cols.PeopleCollection.PeopleList)
+            foreach (var p in cols.PeopleCollection)
             {
                 if ((firstNameEntryBox.Text.Trim().ToUpper() == p.FirstName.ToUpper()) && (lastNameEntryBox.Text.Trim().ToUpper() == p.LastName.ToUpper()))
                 {
@@ -713,9 +713,9 @@ namespace CapstoneProject
             //If the book's author is new to the database, create a new Person ID and add it, with all their info, to the database
             if (newAuthorID == 0)
             {
-                newAuthorID = cols.PeopleCollection.PeopleList.Count + 1;
+                newAuthorID = cols.PeopleCollection.Count + 1;
                 Authors newAuthor = new Authors(newAuthorID, firstNameEntryBox.Text.Trim(), lastNameEntryBox.Text.Trim(), bioEntryBox.Text.Trim());
-                cols.PeopleCollection.PeopleList[0] = newAuthor;
+                cols.PeopleCollection[0] = newAuthor;
                 db.People.Add(newAuthor);
                 db.SaveChanges();
             }

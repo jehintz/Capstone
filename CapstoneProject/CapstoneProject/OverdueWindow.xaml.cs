@@ -40,7 +40,7 @@ namespace CapstoneProject
                         if (b.BookID == co.BookID)
                         {
                             //Finally, get the Cardholder information for that log
-                            foreach (var p in cols.PeopleCollection.PeopleList)
+                            foreach (var p in cols.PeopleCollection)
                             {
                                 if (p.PersonID == co.CardholderID)
                                 {

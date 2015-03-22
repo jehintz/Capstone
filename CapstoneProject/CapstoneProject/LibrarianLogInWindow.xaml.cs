@@ -65,7 +65,7 @@ namespace CapstoneProject
             }
 
             //Search for a librarian with a User ID matching the one entered
-            foreach(var p in cols.PeopleCollection.PeopleList)
+            foreach(var p in cols.PeopleCollection)
             {
                 if (p is Librarians)
                 {

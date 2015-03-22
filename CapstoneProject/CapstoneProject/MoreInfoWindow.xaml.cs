@@ -45,7 +45,7 @@ namespace CapstoneProject
                     languagesLabel.Content = b.Language;
                     isbnLabel.Content = b.ISBN;
                     descriptionTextBlock.Text = b.Description;
-                    foreach (var p in cols.PeopleCollection.PeopleList)
+                    foreach (var p in cols.PeopleCollection)
                     {
                         if (p.PersonID == b.AuthorID)
                         {

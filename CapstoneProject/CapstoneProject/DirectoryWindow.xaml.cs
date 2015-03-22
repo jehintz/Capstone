@@ -44,7 +44,7 @@ namespace CapstoneProject
             directoryRichTextBox.AppendText("\n");
 
             //Go through the People collection finding only Librarians
-            foreach (var p in cols.PeopleCollection.PeopleList)
+            foreach (var p in cols.PeopleCollection)
             {
                 if (p is Librarians)
                 {
@@ -72,7 +72,7 @@ namespace CapstoneProject
             directoryRichTextBox.AppendText("\n");
 
             //Go through the People collection finding only Cardholders
-            foreach (var p in cols.PeopleCollection.PeopleList)
+            foreach (var p in cols.PeopleCollection)
             {
                 if (p is Cardholders)
                 {
@@ -114,7 +114,7 @@ namespace CapstoneProject
             directoryRichTextBox.AppendText("\n");
 
             //Go through the People collection finding only Authors
-            foreach (var p in cols.PeopleCollection.PeopleList)
+            foreach (var p in cols.PeopleCollection)
             {
                 if (p is Authors)
                 {

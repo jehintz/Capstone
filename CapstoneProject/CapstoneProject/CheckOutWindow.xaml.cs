@@ -182,7 +182,7 @@ namespace CapstoneProject
             }
 
             //Check for a matching Library Card ID among the cardholders
-            foreach (var p in cols.PeopleCollection.PeopleList)
+            foreach (var p in cols.PeopleCollection)
             {
                 if (p is Cardholders)
                 {

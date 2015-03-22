@@ -36,7 +36,7 @@ namespace CapstoneProject
             {
                 //Clear all collections before (re)writing to them so there are no duplicates
                 _bookCollection.BookList.Clear();
-                _peopleCollection.PeopleList.Clear();
+                //_peopleCollection.PeopleList.Clear();
                 _checkedOutCollection.CheckedOutList.Clear();
 
                 //Query the database to retrieve all People
@@ -54,7 +54,7 @@ namespace CapstoneProject
                         PeopleCollection[0] = p as Cardholders;
                 }
                 //Now that all people have been added, perform a sort
-                PeopleCollection.PeopleList.Sort();
+                //PeopleCollection.PeopleList.Sort();
 
                 //Query the database to retrieve all Books
                 var bookObjects = from b in db.Books select b;
@@ -96,7 +96,7 @@ namespace CapstoneProject
                     && b.NumberOfCopies > 0)
                 {
                     //If a match is found, get that book's author
-                    foreach (var a in PeopleCollection.PeopleList)
+                    foreach (var a in PeopleCollection)
                     {
                         if (b.AuthorID == a.PersonID)
                         {
@@ -108,7 +108,7 @@ namespace CapstoneProject
                 }
             }
             //Go through each author and search for a match between the given Query and the author's First or Last Name
-            foreach (People p in PeopleCollection.PeopleList)
+            foreach (People p in PeopleCollection)
             {
                 if (p is Authors)
                 {
@@ -155,7 +155,7 @@ namespace CapstoneProject
                 if (b.Title.ToUpper().Contains(query.ToUpper()) && b.NumberOfCopies > 0)
                 {
                     //If a book is found, get the book's author
-                    foreach (var a in PeopleCollection.PeopleList)
+                    foreach (var a in PeopleCollection)
                     {
                         if (b.AuthorID == a.PersonID)
                         {
@@ -178,7 +178,7 @@ namespace CapstoneProject
             resultsList = new List<BookSearchDisplay>();
 
             //Find any authors that contain the incoming query in their first or last name
-            foreach (People p in PeopleCollection.PeopleList)
+            foreach (People p in PeopleCollection)
             {
                 if (p is Authors)
                 {
@@ -232,7 +232,7 @@ namespace CapstoneProject
                 if (b.ISBN.ToString().Contains(query) && b.NumberOfCopies > 0)
                 {
                     //If a book match was found, get that book's author
-                    foreach (var a in _peopleCollection.PeopleList)
+                    foreach (var a in _peopleCollection)
                     {
                         if (b.AuthorID == a.PersonID)
                         {
@@ -257,7 +257,7 @@ namespace CapstoneProject
             {
                 if (b.Subject.ToUpper().Contains(query.ToUpper()) && b.NumberOfCopies > 0)
                 {
-                    foreach (var a in PeopleCollection.PeopleList)
+                    foreach (var a in PeopleCollection)
                     {
                         if (b.AuthorID == a.PersonID)
                         {
@@ -297,7 +297,7 @@ namespace CapstoneProject
             bool idFound = false;
 
             //Find the cardholder with a matching Library Card ID
-            foreach (var p in PeopleCollection.PeopleList)
+            foreach (var p in PeopleCollection)
             {
                 if (p is Cardholders)
                 {
