@@ -46,7 +46,7 @@ namespace CapstoneProject
                                 {
                                     //Add the overdue Log and all relevant information to the ListView
                                     var coExpander = new Expander();
-                                    coExpander.Header = co.CheckOutDate.ToShortDateString() + " - \"" + b.Title + "\" (ID " + co.BookID + ")";
+                                    coExpander.Header = "Due as of " + co.CheckOutDate.AddDays(30).ToShortDateString() + " - \"" + b.Title + "\" (ID " + co.BookID + ")";
                                     coExpander.Content = "ISBN " + b.ISBN + "\nChecked out by " + p;
                                     coExpander.IsExpanded = false;
                                     listView.Items.Add(coExpander);
